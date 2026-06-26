@@ -2,6 +2,7 @@
   <footer
     id="footer"
     class="site-footer"
+    :class="{ 'site-footer--promo': isPromoVisible }"
   >
     <div class="footer-central-mod">
       <FooterNav :columns="columns" />
@@ -43,6 +44,7 @@ import {
   FOOTER_TEXT,
 } from '@/constants/footer'
 import { useFooter } from '@/composables/useFooter'
+import { usePromoBar } from '@/composables/usePromoBar'
 import FooterNav from './FooterNav.vue'
 import FooterMiddle from './FooterMiddle.vue'
 import FooterBottom from './FooterBottom.vue'
@@ -55,6 +57,8 @@ const {
   handleSubscribe,
   handleGdprClick,
 } = useFooter()
+
+const { isVisible: isPromoVisible } = usePromoBar()
 
 const columns = FOOTER_COLUMNS
 const logoSrc = FOOTER_IMG_URLS.logo
@@ -83,9 +87,20 @@ const countryName = FOOTER_TEXT.countryName
   width: 100%;
 }
 
+.site-footer--promo::after {
+  content: '';
+  display: block;
+  height: var(--promo-bar-height, 120px);
+  background-color: #0050e2;
+}
+
 @media screen and (max-width: 1000px) {
   .site-footer {
     padding-top: 64px;
+  }
+
+  .site-footer--promo::after {
+    height: var(--promo-bar-height-mobile, 200px);
   }
 }
 </style>

@@ -10,8 +10,7 @@
   <MediaRecognitionSection />
   <AboutReolinkSection />
   <ReolinkFooter />
-  <main class="demo-main">
-  </main>
+  <PromoBar />
 </template>
 
 <script setup>
@@ -26,6 +25,7 @@ import UserContentSection from '@/components/userContent/index.vue'
 import MediaRecognitionSection from '@/components/mediaRecognition/index.vue'
 import AboutReolinkSection from '@/components/aboutReolink/index.vue'
 import ReolinkFooter from '@/components/footer/index.vue'
+import PromoBar from '@/components/promoBar/index.vue'
 </script>
 
 <style>
@@ -40,16 +40,5 @@ body {
   background: #f5f6f8;
   color: #1a1a1a;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-}
-
-.demo-main {
-  max-width: 1440px;
-  margin: 0 auto;
-  padding: 48px 24px;
-}
-
-.demo-main p {
-  font-size: 16px;
-  line-height: 1.6;
 }
 </style>
