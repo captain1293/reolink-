@@ -9,6 +9,7 @@
   <UserContentSection />
   <MediaRecognitionSection />
   <AboutReolinkSection />
+  <ReolinkFooter />
   <main class="demo-main">
   </main>
 </template>
@@ -24,6 +25,7 @@ import PromiseSection from '@/components/promise/index.vue'
 import UserContentSection from '@/components/userContent/index.vue'
 import MediaRecognitionSection from '@/components/mediaRecognition/index.vue'
 import AboutReolinkSection from '@/components/aboutReolink/index.vue'
+import ReolinkFooter from '@/components/footer/index.vue'
 </script>
 
 <style>
