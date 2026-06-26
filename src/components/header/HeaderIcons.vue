@@ -148,20 +148,18 @@ defineEmits<{
 }>()
 
 const brandPrimary = HEADER_COLORS.brandPrimary
-const navActiveBg = HEADER_COLORS.navActiveBg
 </script>
 
 <style scoped>
 .nav-icon-layer {
   display: flex;
   align-items: center;
+  flex-shrink: 0;
   list-style: none;
   margin: 0;
   padding: 0;
-  gap: 2px;
-  height: 64px;
+  height: 60px;
   --nav-brand-primary: v-bind(brandPrimary);
-  --nav-active-bg: v-bind(navActiveBg);
 }
 
 .nav-icon {
@@ -169,48 +167,28 @@ const navActiveBg = HEADER_COLORS.navActiveBg
   height: 100%;
   display: flex;
   align-items: center;
+  padding: 0 10px;
 }
 
-/* 与左侧主导航一致的选中态 */
 .nav-icon-trigger {
-  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 6px;
-  height: 40px;
-  margin: 0 2px;
-  padding: 0 12px;
-  color: rgba(255, 255, 255, 0.85);
+  height: 60px;
+  padding: 0;
+  color: #fff;
   cursor: pointer;
   text-decoration: none;
-  border-radius: 8px;
   border: none;
   background: transparent;
-  transition: color 0.2s, background 0.2s;
+  font-size: 18px;
+  font-weight: 500;
+  transition: color 0.2s;
 }
 
-.nav-icon-trigger:hover {
-  color: #fff;
-}
-
+.nav-icon-trigger:hover,
 .nav-icon-trigger.is-active {
-  color: var(--nav-brand-primary);
-  background: var(--nav-active-bg);
-}
-
-.nav-icon-trigger.is-active::after {
-  content: '';
-  position: absolute;
-  left: 8px;
-  right: 8px;
-  bottom: -12px;
-  height: 3px;
-  background: var(--nav-brand-primary);
-  border-radius: 2px 2px 0 0;
-}
-
-.nav-icon-trigger.is-active .country-abbreviation {
   color: var(--nav-brand-primary);
 }
 
@@ -238,14 +216,26 @@ const navActiveBg = HEADER_COLORS.navActiveBg
   text-align: center;
 }
 
+.country-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
 .country-abbreviation {
-  font-size: 13px;
-  color: rgba(255, 255, 255, 0.85);
-  max-width: 100px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #fff;
+  max-width: 120px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   transition: color 0.2s;
+}
+
+.nav-icon-trigger:hover .country-abbreviation,
+.nav-icon-trigger.is-active .country-abbreviation {
+  color: var(--nav-brand-primary);
 }
 
 /* 下拉浮层 — 与左侧子菜单一致 */

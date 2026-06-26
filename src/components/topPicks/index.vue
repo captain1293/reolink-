@@ -76,7 +76,7 @@ const sectionBg = TOP_PICKS_COLORS.sectionBg
 @media screen and (min-width: 1024px) {
   .top-picks-section {
     padding-top: 80px;
-    padding-bottom: 80px;
+    padding-bottom: 48px;
   }
 
   .section-title {

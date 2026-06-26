@@ -2,6 +2,7 @@
   <ReolinkHeader />
   <BannerSection />
   <TopPicksSection />
+  <RecommendationSection />
   <main class="demo-main">
   </main>
 </template>
@@ -10,6 +11,7 @@
 import ReolinkHeader from '@/components/header/index.vue'
 import BannerSection from '@/components/banner/index.vue'
 import TopPicksSection from '@/components/topPicks/index.vue'
+import RecommendationSection from '@/components/recommendation/index.vue'
 </script>
 
 <style>

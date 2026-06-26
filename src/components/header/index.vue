@@ -7,7 +7,7 @@
       <HeaderLogo />
 
       <div class="header-right nav-flex-1">
-        <div class="nav-row">
+        <div class="nav">
           <HeaderNav
             :products-open="activeDropdown === 'products'"
             :support-label="HEADER_TEXT.support"
@@ -149,11 +149,10 @@ const {
 .header-wrapper {
   display: flex;
   align-items: center;
-  max-width: 1440px;
+  width: 100%;
   margin: 0 auto;
-  padding: 0 24px;
-  height: 64px;
-  gap: 32px;
+  padding: 0 calc((100% - 944px) / 2);
+  height: 60px;
 }
 
 .header-right {
@@ -161,15 +160,29 @@ const {
   min-width: 0;
 }
 
-.nav-row {
+.nav {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 16px;
+  justify-content: flex-end;
+  width: 100%;
+  height: 60px;
+  line-height: 60px;
 }
 
 .nav-flex-1 {
   flex: 1;
+}
+
+@media screen and (min-width: 1200px) {
+  .header-wrapper {
+    padding: 0 calc((100% - 1200px) / 2);
+  }
+}
+
+@media screen and (min-width: 1480px) {
+  .header-wrapper {
+    padding: 0 calc((100% - 1400px) / 2);
+  }
 }
 
 .gradient-line {

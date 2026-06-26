@@ -60,7 +60,7 @@
         <a
           tabindex="0"
           role="button"
-          class="nav-text"
+          class="nav-text text-special-point"
           :class="{ 'is-active': dealsOpen }"
         >
           <span>{{ dealsLabel }}</span>
@@ -119,70 +119,104 @@ defineEmits<{
 const partnerHovered = ref(false)
 
 const brandPrimary = HEADER_COLORS.brandPrimary
-const navActiveBg = HEADER_COLORS.navActiveBg
 </script>
 
 <style scoped>
 .header-nav {
   flex: 1;
+  min-width: 0;
+  display: flex;
   --nav-brand-primary: v-bind(brandPrimary);
-  --nav-active-bg: v-bind(navActiveBg);
 }
 
 .nav-layer {
   display: flex;
   align-items: center;
+  justify-content: center;
+  flex: 1;
   list-style: none;
   margin: 0;
   padding: 0;
-  height: 64px;
+  padding-left: 0;
+  height: 60px;
 }
 
 .nav-item {
   position: relative;
-  height: 100%;
+  height: 60px;
   display: flex;
   align-items: center;
+  padding: 0;
 }
 
 /* 主导航文案 — 含 Products 插槽内项 */
 .nav-item :deep(.nav-text) {
   position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  height: 40px;
-  margin: 0 4px;
-  padding: 0 16px;
-  color: rgba(255, 255, 255, 0.85);
-  font-size: 15px;
+  display: inline-block;
+  height: 50px;
+  margin-top: 10px;
+  padding: 0 15px;
+  color: #fff;
+  font-size: 16px;
   font-weight: 500;
+  line-height: 40px;
   text-decoration: none;
   cursor: pointer;
   white-space: nowrap;
-  border-radius: 8px;
+  border-bottom: 5px solid transparent;
+  border-radius: 0;
+  background: transparent;
   transition: color 0.2s, background 0.2s;
 }
 
-.nav-item :deep(.nav-text:hover) {
-  color: #fff;
+.nav-item :deep(.nav-text > span) {
+  display: inline;
+  font-weight: 500;
 }
 
-/* 选中态：品牌蓝文字 + 浅灰圆角底 + 底部指示条 */
+.nav-item :deep(.nav-text:hover),
 .nav-item :deep(.nav-text.is-active) {
+  padding: 0 15px;
+  border-bottom: none;
+  background: rgba(100, 100, 100, 0.5);
+  border-radius: 10px 10px 0 0;
   color: var(--nav-brand-primary);
-  background: var(--nav-active-bg);
 }
 
-.nav-item :deep(.nav-text.is-active)::after {
+.nav-item :deep(.nav-text:hover > span),
+.nav-item :deep(.nav-text.is-active > span) {
+  display: inline-block;
+  height: 50px;
+  border-bottom: 5px solid var(--nav-brand-primary);
+}
+
+.nav-item.for-business :deep(.nav-text:hover),
+.nav-item.for-business :deep(.nav-text.is-active) {
+  background: transparent;
+  border-radius: 0;
+}
+
+.nav-item.for-business :deep(.nav-text:hover > span),
+.nav-item.for-business :deep(.nav-text.is-active > span) {
+  border-bottom-color: transparent;
+}
+
+/* Deals 橙色提示点 */
+.nav-item :deep(.text-special-point) {
+  position: relative;
+  display: inline-block;
+}
+
+.nav-item :deep(.text-special-point)::after {
   content: '';
   position: absolute;
-  left: 12px;
-  right: 12px;
-  bottom: -12px;
-  height: 3px;
-  background: var(--nav-brand-primary);
-  border-radius: 2px 2px 0 0;
+  display: block;
+  width: 6px;
+  height: 6px;
+  border-radius: 100%;
+  right: 9px;
+  top: 10px;
+  background-color: #e74300;
 }
 
 /* 下拉浮层 */
@@ -229,5 +263,31 @@ const navActiveBg = HEADER_COLORS.navActiveBg
   transform: none;
   margin-left: 4px;
   border-radius: 8px;
+}
+
+@media screen and (min-width: 1200px) {
+  .nav-layer {
+    padding-left: 180px;
+  }
+
+  .nav-item :deep(.nav-text) {
+    padding: 0 25px;
+  }
+
+  .nav-item :deep(.nav-text:hover),
+  .nav-item :deep(.nav-text.is-active) {
+    padding: 0 25px;
+  }
+
+  .nav-item :deep(.text-special-point)::after {
+    right: 19px;
+    top: 10px;
+  }
+}
+
+@media screen and (min-width: 1480px) {
+  .nav-layer {
+    padding-left: 270px;
+  }
 }
 </style>

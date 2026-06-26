@@ -82,7 +82,7 @@ export const HEADER_COLORS = {
   text: '#ffffff',
   textMuted: 'rgba(255, 255, 255, 0.65)',
   textHover: '#ffffff',
-  brandPrimary: 'rgb(68, 111, 246)',
+  brandPrimary: '#0e6aff',
   navActiveBg: 'rgba(255, 255, 255, 0.1)',
   border: 'rgba(255, 255, 255, 0.12)',
   dropdownBg: '#0d1520',

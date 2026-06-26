@@ -31,8 +31,8 @@ const homeHref = 'https://reolink.com/'
 }
 
 .logo {
-  height: 28px;
-  width: auto;
+  width: 138px;
+  height: 35px;
   display: block;
 }
 </style>
