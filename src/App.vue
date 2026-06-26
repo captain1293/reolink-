@@ -11,6 +11,7 @@
   <AboutReolinkSection />
   <ReolinkFooter />
   <PromoBar />
+  <LiveStream />
 </template>
 
 <script setup>
@@ -26,6 +27,7 @@ import MediaRecognitionSection from '@/components/mediaRecognition/index.vue'
 import AboutReolinkSection from '@/components/aboutReolink/index.vue'
 import ReolinkFooter from '@/components/footer/index.vue'
 import PromoBar from '@/components/promoBar/index.vue'
+import LiveStream from '@/components/liveStream/index.vue'
 </script>
 
 <style>
