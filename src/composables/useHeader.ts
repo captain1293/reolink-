@@ -96,6 +96,10 @@ export function useHeader() {
     }
   }
 
+  function handleSearchSubmit() {
+    window.location.href = searchUrl.value
+  }
+
   function handleIconLeave(key: DropdownKey) {
     if (activeDropdown.value === key) closeDropdown()
   }
@@ -192,6 +196,7 @@ export function useHeader() {
     handleProductSearchInput,
     handleTopSearchInput,
     toggleSearch,
+    handleSearchSubmit,
     handleAccountEnter,
     handleAccountLeave,
     handleCartEnter,

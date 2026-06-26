@@ -103,7 +103,7 @@ export const BANNER_SLIDES: BannerSlideData[] = [
     buttons: [{ text: 'Shop Deals', textColor: '#432900', bgColor: '#FFC400', href: '#' }],
     countdown: {
       endTime: PRIME_DEAL_END_TIME,
-      textColor: 'rgb(55, 39, 25)',
+      textColor: '#FFFFFF',
       expireText: '',
     },
   },

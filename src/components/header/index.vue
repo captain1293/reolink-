@@ -53,13 +53,6 @@
             :account-open="activeDropdown === 'account'"
             :cart-open="activeDropdown === 'cart'"
             :country-active="activeDropdown === 'country'"
-            :search-query="topSearchQuery"
-            :search-url="searchUrl"
-            :search-placeholder="HEADER_TEXT.topSearchPlaceholder"
-            :recommended-label="HEADER_TEXT.recommendedProducts"
-            :more-products-label="HEADER_TEXT.moreProducts"
-            :store-href="HEADER_LINKS.store"
-            :search-recommends="SEARCH_RECOMMENDS"
             :account-menu="isLoggedIn ? LOGGED_IN_MENU : LOGGED_OUT_MENU"
             :cart-quantity="cartQuantity"
             :empty-cart-text="HEADER_TEXT.emptyCart"
@@ -70,8 +63,6 @@
             :cart-href="HEADER_LINKS.cart"
             :country="HEADER_TEXT.country"
             @toggle-search="toggleSearch"
-            @search-input="handleTopSearchInput"
-            @search-submit="() => {}"
             @account-enter="handleAccountEnter"
             @account-leave="handleAccountLeave"
             @cart-enter="handleCartEnter"
@@ -82,6 +73,16 @@
         </div>
       </div>
     </div>
+    <SearchOverlay
+      :visible="activeDropdown === 'search'"
+      :search-query="topSearchQuery"
+      :search-placeholder="HEADER_TEXT.topSearchPlaceholder"
+      :recommended-label="HEADER_TEXT.recommendedProducts"
+      :search-recommends="SEARCH_RECOMMENDS"
+      @close="toggleSearch"
+      @search-input="handleTopSearchInput"
+      @search-submit="handleSearchSubmit"
+    />
     <i class="gradient-line" />
   </header>
 </template>
@@ -101,6 +102,7 @@ import HeaderLogo from './HeaderLogo.vue'
 import HeaderNav from './HeaderNav.vue'
 import ProductDropdown from './ProductDropdown.vue'
 import HeaderIcons from './HeaderIcons.vue'
+import SearchOverlay from './SearchOverlay.vue'
 
 const {
   activeDropdown,
@@ -110,13 +112,13 @@ const {
   isLoggedIn,
   cartQuantity,
   filteredProductPanel,
-  searchUrl,
   handleProductsEnter,
   handleProductsLeave,
   selectProductTab,
   handleProductSearchInput,
   handleTopSearchInput,
   toggleSearch,
+  handleSearchSubmit,
   handleAccountEnter,
   handleAccountLeave,
   handleCartEnter,

@@ -21,52 +21,6 @@
           </svg>
         </span>
       </a>
-
-      <div v-show="searchOpen" class="icon-dropdown search-down">
-        <div class="search-mod">
-          <div class="search-row">
-            <input
-              title="search"
-              type="text"
-              class="search-mod-input"
-              :placeholder="searchPlaceholder"
-              :value="searchQuery"
-              @input="$emit('search-input', ($event.target as HTMLInputElement).value)"
-              @keydown.enter.prevent="$emit('search-submit')"
-            >
-            <a
-              :href="searchUrl"
-              class="search-confirm-button"
-              @click="$emit('search-submit')"
-            >
-              <span class="sr-only">search submit</span>
-              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="11" cy="11" r="7" />
-                <path d="M20 20l-3.5-3.5" />
-              </svg>
-            </a>
-          </div>
-        </div>
-        <div class="search-info-mod">
-          <label>{{ recommendedLabel }}</label>
-          <ul>
-            <li v-for="item in searchRecommends" :key="item.href" class="recommend">
-              <a class="recommend-box" :href="item.href">
-                <img :src="item.image" :alt="item.name">
-                <h3>{{ item.name }}</h3>
-              </a>
-            </li>
-          </ul>
-          <div class="more-product">
-            <a :href="storeHref">
-              <span class="more-link-text">{{ moreProductsLabel }}</span>
-              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M9 6l6 6-6 6" />
-              </svg>
-            </a>
-          </div>
-        </div>
-      </div>
     </li>
 
     <!-- Account -->
@@ -164,7 +118,7 @@
 </template>
 
 <script setup lang="ts">
-import type { AccountMenuItem, SearchRecommend } from '@/types/header'
+import type { AccountMenuItem } from '@/types/header'
 import { HEADER_COLORS } from '@/constants/header'
 
 defineProps<{
@@ -172,13 +126,6 @@ defineProps<{
   accountOpen: boolean
   cartOpen: boolean
   countryActive: boolean
-  searchQuery: string
-  searchUrl: string
-  searchPlaceholder: string
-  recommendedLabel: string
-  moreProductsLabel: string
-  storeHref: string
-  searchRecommends: SearchRecommend[]
   accountMenu: AccountMenuItem[]
   cartQuantity: number
   emptyCartText: string
@@ -192,8 +139,6 @@ defineProps<{
 
 defineEmits<{
   'toggle-search': []
-  'search-input': [value: string]
-  'search-submit': []
   'account-enter': []
   'account-leave': []
   'cart-enter': []
@@ -320,112 +265,6 @@ const navActiveBg = HEADER_COLORS.navActiveBg
   left: 50%;
   right: auto;
   transform: translateX(-50%);
-}
-
-.search-down {
-  width: 420px;
-  overflow: hidden;
-}
-
-.search-mod {
-  padding: 16px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-}
-
-.search-row {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  background: rgb(247, 248, 249);
-  border-radius: 8px;
-  padding: 4px 4px 4px 14px;
-}
-
-.search-mod-input {
-  flex: 1;
-  border: none;
-  background: transparent;
-  color: #1a1a1a;
-  font-size: 14px;
-  outline: none;
-  min-width: 0;
-}
-
-.search-confirm-button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
-  border-radius: 6px;
-  background: rgba(0, 0, 0, 0.06);
-  color: #1a1a1a;
-  text-decoration: none;
-}
-
-.search-info-mod {
-  padding: 16px;
-}
-
-.search-info-mod label {
-  display: block;
-  margin-bottom: 12px;
-  font-size: 12px;
-  font-weight: 600;
-  color: rgba(0, 0, 0, 0.45);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-.search-info-mod ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.recommend-box {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 10px;
-  border-radius: 8px;
-  text-decoration: none;
-  color: #1a1a1a;
-  transition: background 0.2s;
-}
-
-.recommend-box:hover {
-  background: rgba(0, 0, 0, 0.04);
-}
-
-.recommend-box img {
-  width: 48px;
-  height: 48px;
-  object-fit: contain;
-  background: rgb(247, 248, 249);
-  border-radius: 6px;
-}
-
-.recommend-box h3 {
-  margin: 0;
-  font-size: 13px;
-  font-weight: 500;
-  line-height: 1.35;
-}
-
-.more-product {
-  margin-top: 12px;
-  padding-top: 12px;
-  border-top: 1px solid rgba(0, 0, 0, 0.08);
-}
-
-.more-product a {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  color: #1a1a1a;
-  font-size: 14px;
-  text-decoration: none;
 }
 
 .account-dropdown {
