@@ -19,7 +19,6 @@
           role="button"
           class="nav-text"
           :class="{ 'is-active': supportOpen || downloadOpen }"
-          @click.prevent="$emit('toggle-support')"
         >
           <span>{{ supportLabel }}</span>
         </a>
@@ -42,7 +41,6 @@
               v-else
               role="button"
               tabindex="0"
-              @click.prevent="item.children && $emit('toggle-download')"
             >{{ item.label }}</a>
             <ul v-if="item.children" v-show="downloadOpen" class="nav-dropdown nav-dropdown-default sub-dropdown">
               <li v-for="child in item.children" :key="child.label" class="menu-item">
@@ -64,7 +62,6 @@
           role="button"
           class="nav-text"
           :class="{ 'is-active': dealsOpen }"
-          @click.prevent="$emit('toggle-deals')"
         >
           <span>{{ dealsLabel }}</span>
         </a>
@@ -111,13 +108,10 @@ defineProps<{
 }>()
 
 defineEmits<{
-  'toggle-support': []
   'support-enter': []
   'support-leave': []
-  'toggle-deals': []
   'deals-enter': []
   'deals-leave': []
-  'toggle-download': []
   'download-enter': []
   'download-leave': []
 }>()

@@ -16,18 +16,15 @@
             :partner-href="HEADER_LINKS.partner"
             :support-menu="SUPPORT_MENU"
             :deals-menu="DEALS_MENU"
-            :support-open="activeDropdown === 'support'"
+            :support-open="activeDropdown === 'support' || activeDropdown === 'download'"
             :deals-open="activeDropdown === 'deals'"
             :download-open="activeDropdown === 'download'"
-            @toggle-support="toggleSupport"
-            @support-enter="openDropdown('support')"
-            @support-leave="closeDropdown"
-            @toggle-deals="toggleDeals"
-            @deals-enter="openDropdown('deals')"
-            @deals-leave="closeDropdown"
-            @toggle-download="toggleDownloadCenter"
-            @download-enter="openDropdown('download')"
-            @download-leave="closeDropdown"
+            @support-enter="handleSupportEnter"
+            @support-leave="handleSupportLeave"
+            @deals-enter="handleDealsEnter"
+            @deals-leave="handleDealsLeave"
+            @download-enter="handleDownloadEnter"
+            @download-leave="handleDownloadLeave"
           >
             <template #products>
               <ProductDropdown
@@ -43,7 +40,6 @@
                 :get-list-page-index="getListPageIndex"
                 @mouseenter="handleProductsEnter"
                 @mouseleave="handleProductsLeave"
-                @toggle="toggleDropdown('products')"
                 @select-tab="selectProductTab"
                 @search="handleProductSearchInput"
                 @prev-page="prevListPage"
@@ -56,6 +52,7 @@
             :search-open="activeDropdown === 'search'"
             :account-open="activeDropdown === 'account'"
             :cart-open="activeDropdown === 'cart'"
+            :country-active="activeDropdown === 'country'"
             :search-query="topSearchQuery"
             :search-url="searchUrl"
             :search-placeholder="HEADER_TEXT.topSearchPlaceholder"
@@ -73,12 +70,14 @@
             :cart-href="HEADER_LINKS.cart"
             :country="HEADER_TEXT.country"
             @toggle-search="toggleSearch"
-            @close-search="closeSearch"
             @search-input="handleTopSearchInput"
             @search-submit="() => {}"
-            @toggle-account="toggleAccount"
-            @toggle-cart="toggleCart"
-            @country-click="() => {}"
+            @account-enter="handleAccountEnter"
+            @account-leave="handleAccountLeave"
+            @cart-enter="handleCartEnter"
+            @cart-leave="handleCartLeave"
+            @country-enter="handleCountryEnter"
+            @country-leave="handleCountryLeave"
           />
         </div>
       </div>
@@ -118,15 +117,18 @@ const {
   handleProductSearchInput,
   handleTopSearchInput,
   toggleSearch,
-  closeSearch,
-  toggleAccount,
-  toggleCart,
-  toggleSupport,
-  toggleDeals,
-  toggleDownloadCenter,
-  openDropdown,
-  closeDropdown,
-  toggleDropdown,
+  handleAccountEnter,
+  handleAccountLeave,
+  handleCartEnter,
+  handleCartLeave,
+  handleCountryEnter,
+  handleCountryLeave,
+  handleSupportEnter,
+  handleSupportLeave,
+  handleDealsEnter,
+  handleDealsLeave,
+  handleDownloadEnter,
+  handleDownloadLeave,
   getListPageIndex,
   nextListPage,
   prevListPage,

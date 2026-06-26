@@ -10,6 +10,7 @@ export type DropdownKey =
   | 'search'
   | 'account'
   | 'cart'
+  | 'country'
   | 'download'
   | null
 
@@ -95,28 +96,60 @@ export function useHeader() {
     }
   }
 
-  function closeSearch() {
-    if (activeDropdown.value === 'search') closeDropdown()
+  function handleIconLeave(key: DropdownKey) {
+    if (activeDropdown.value === key) closeDropdown()
   }
 
-  function toggleAccount() {
-    toggleDropdown('account')
+  function handleAccountEnter() {
+    openDropdown('account')
   }
 
-  function toggleCart() {
-    toggleDropdown('cart')
+  function handleAccountLeave() {
+    handleIconLeave('account')
   }
 
-  function toggleSupport() {
-    toggleDropdown('support')
+  function handleCartEnter() {
+    openDropdown('cart')
   }
 
-  function toggleDeals() {
-    toggleDropdown('deals')
+  function handleCartLeave() {
+    handleIconLeave('cart')
   }
 
-  function toggleDownloadCenter() {
-    toggleDropdown(activeDropdown.value === 'download' ? null : 'download')
+  function handleCountryEnter() {
+    openDropdown('country')
+  }
+
+  function handleCountryLeave() {
+    handleIconLeave('country')
+  }
+
+  function handleSupportEnter() {
+    openDropdown('support')
+  }
+
+  function handleSupportLeave() {
+    if (activeDropdown.value === 'support' || activeDropdown.value === 'download') {
+      closeDropdown()
+    }
+  }
+
+  function handleDealsEnter() {
+    openDropdown('deals')
+  }
+
+  function handleDealsLeave() {
+    handleIconLeave('deals')
+  }
+
+  function handleDownloadEnter() {
+    openDropdown('download')
+  }
+
+  function handleDownloadLeave() {
+    if (activeDropdown.value === 'download') {
+      openDropdown('support')
+    }
   }
 
   function getListPageKey(subTitle: string) {
@@ -159,12 +192,19 @@ export function useHeader() {
     handleProductSearchInput,
     handleTopSearchInput,
     toggleSearch,
-    closeSearch,
-    toggleAccount,
-    toggleCart,
-    toggleSupport,
-    toggleDeals,
-    toggleDownloadCenter,
+    handleAccountEnter,
+    handleAccountLeave,
+    handleCartEnter,
+    handleCartLeave,
+    handleCountryEnter,
+    handleCountryLeave,
+    handleSupportEnter,
+    handleSupportLeave,
+    handleDealsEnter,
+    handleDealsLeave,
+    handleDownloadEnter,
+    handleDownloadLeave,
+    handleIconLeave,
     getListPageIndex,
     nextListPage,
     prevListPage,

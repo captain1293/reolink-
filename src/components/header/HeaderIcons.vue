@@ -1,153 +1,177 @@
 <template>
   <ul class="nav-layer nav-icon-layer">
-  <!-- Search -->
-  <li class="nav-icon nav-search">
-    <a
-      tabindex="0"
-      role="button"
-      aria-label="Search"
-      class="search-item"
-      @click.prevent="$emit('toggle-search')"
+    <!-- Search -->
+    <li
+      class="nav-icon nav-search"
+      :class="{ 'is-active': searchOpen }"
     >
-      <span class="icon-svg" aria-hidden="true">
-        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8">
-          <circle cx="11" cy="11" r="7" />
-          <path d="M20 20l-3.5-3.5" />
-        </svg>
-      </span>
-    </a>
+      <a
+        tabindex="0"
+        role="button"
+        aria-label="Search"
+        class="nav-icon-trigger"
+        :class="{ 'is-active': searchOpen }"
+        @click.prevent="$emit('toggle-search')"
+        @keydown.enter.prevent="$emit('toggle-search')"
+      >
+        <span class="icon-svg" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8">
+            <circle cx="11" cy="11" r="7" />
+            <path d="M20 20l-3.5-3.5" />
+          </svg>
+        </span>
+      </a>
 
-    <div v-show="searchOpen" class="search-down">
-      <div class="search-mod">
-        <div class="search-row">
-          <input
-            title="search"
-            type="text"
-            class="search-mod-input"
-            :placeholder="searchPlaceholder"
-            :value="searchQuery"
-            @input="$emit('search-input', ($event.target as HTMLInputElement).value)"
-            @keydown.enter.prevent="$emit('search-submit')"
-          >
-          <a
-            :href="searchUrl"
-            class="search-confirm-button"
-            @click="$emit('search-submit')"
-          >
-            <span class="sr-only">search submit</span>
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
-              <circle cx="11" cy="11" r="7" />
-              <path d="M20 20l-3.5-3.5" />
-            </svg>
-          </a>
-          <button type="button" class="close-btn" aria-label="Close search" @click="$emit('close-search')">
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M6 6l12 12M18 6L6 18" />
-            </svg>
-          </button>
-        </div>
-      </div>
-      <div class="search-info-mod">
-        <label>{{ recommendedLabel }}</label>
-        <ul>
-          <li v-for="item in searchRecommends" :key="item.href" class="recommend">
-            <a class="recommend-box" :href="item.href">
-              <img :src="item.image" :alt="item.name">
-              <h3>{{ item.name }}</h3>
+      <div v-show="searchOpen" class="icon-dropdown search-down">
+        <div class="search-mod">
+          <div class="search-row">
+            <input
+              title="search"
+              type="text"
+              class="search-mod-input"
+              :placeholder="searchPlaceholder"
+              :value="searchQuery"
+              @input="$emit('search-input', ($event.target as HTMLInputElement).value)"
+              @keydown.enter.prevent="$emit('search-submit')"
+            >
+            <a
+              :href="searchUrl"
+              class="search-confirm-button"
+              @click="$emit('search-submit')"
+            >
+              <span class="sr-only">search submit</span>
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="7" />
+                <path d="M20 20l-3.5-3.5" />
+              </svg>
             </a>
-          </li>
-        </ul>
-        <div class="more-product">
-          <a :href="storeHref">
-            <span class="more-link-text">{{ moreProductsLabel }}</span>
-            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M9 6l6 6-6 6" />
-            </svg>
-          </a>
+          </div>
+        </div>
+        <div class="search-info-mod">
+          <label>{{ recommendedLabel }}</label>
+          <ul>
+            <li v-for="item in searchRecommends" :key="item.href" class="recommend">
+              <a class="recommend-box" :href="item.href">
+                <img :src="item.image" :alt="item.name">
+                <h3>{{ item.name }}</h3>
+              </a>
+            </li>
+          </ul>
+          <div class="more-product">
+            <a :href="storeHref">
+              <span class="more-link-text">{{ moreProductsLabel }}</span>
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M9 6l6 6-6 6" />
+              </svg>
+            </a>
+          </div>
         </div>
       </div>
-    </div>
-    <div v-show="searchOpen" class="search-mask" @click="$emit('close-search')" />
-  </li>
+    </li>
 
-  <!-- Account -->
-  <li class="nav-icon account-nav">
-    <a
-      tabindex="0"
-      role="button"
-      aria-label="account"
-      class="account-item"
-      @click.prevent="$emit('toggle-account')"
+    <!-- Account -->
+    <li
+      class="nav-icon account-nav"
+      :class="{ 'is-active': accountOpen }"
+      @mouseenter="$emit('account-enter')"
+      @mouseleave="$emit('account-leave')"
     >
-      <span class="icon-svg" aria-hidden="true">
-        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8">
-          <circle cx="12" cy="8" r="4" />
-          <path d="M5 20c0-4 3.5-6 7-6s7 2 7 6" />
-        </svg>
-      </span>
-    </a>
-    <ul v-show="accountOpen" class="account-dropdown nav-dropdown">
-      <li v-for="item in accountMenu" :key="item.href">
-        <a :href="item.href" :target="item.target">{{ item.label }}</a>
-      </li>
-    </ul>
-  </li>
+      <a
+        tabindex="0"
+        role="button"
+        aria-label="account"
+        class="nav-icon-trigger"
+        :class="{ 'is-active': accountOpen }"
+      >
+        <span class="icon-svg" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8">
+            <circle cx="12" cy="8" r="4" />
+            <path d="M5 20c0-4 3.5-6 7-6s7 2 7 6" />
+          </svg>
+        </span>
+      </a>
+      <ul v-show="accountOpen" class="icon-dropdown icon-dropdown-centered account-dropdown">
+        <li v-for="item in accountMenu" :key="item.href">
+          <a :href="item.href" :target="item.target">{{ item.label }}</a>
+        </li>
+      </ul>
+    </li>
 
-  <!-- Cart -->
-  <li class="nav-icon manage-nav">
-    <a
-      tabindex="0"
-      role="button"
-      aria-label="cart"
-      class="manage-item"
-      @click.prevent="$emit('toggle-cart')"
+    <!-- Cart -->
+    <li
+      class="nav-icon manage-nav"
+      :class="{ 'is-active': cartOpen }"
+      @mouseenter="$emit('cart-enter')"
+      @mouseleave="$emit('cart-leave')"
     >
-      <span class="icon-svg" aria-hidden="true">
-        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8">
-          <circle cx="9" cy="20" r="1.5" />
-          <circle cx="17" cy="20" r="1.5" />
-          <path d="M3 4h2l2.5 12h11l2-8H7" />
-        </svg>
-      </span>
-      <i v-show="cartQuantity > 0" class="product-quantity">{{ cartQuantity }}</i>
-    </a>
-    <div v-show="cartOpen && cartQuantity > 0" class="has-product">
-      <p class="total">
-        <label>{{ subtotalLabel }}</label>
-        <span class="unit">US $</span>
-        <span class="price">0.00</span>
-      </p>
-      <a class="ui-button red-button" :href="checkoutHref">{{ checkoutLabel }}</a>
-      <a class="ui-button empty-button" :href="cartHref">{{ viewCartLabel }}</a>
-    </div>
-    <div v-show="cartOpen && cartQuantity === 0" class="no-product nav-dropdown">
-      <p class="empty-cart">{{ emptyCartText }}</p>
-    </div>
-  </li>
+      <a
+        tabindex="0"
+        role="button"
+        aria-label="cart"
+        class="nav-icon-trigger manage-item"
+        :class="{ 'is-active': cartOpen }"
+      >
+        <span class="icon-svg" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8">
+            <circle cx="9" cy="20" r="1.5" />
+            <circle cx="17" cy="20" r="1.5" />
+            <path d="M3 4h2l2.5 12h11l2-8H7" />
+          </svg>
+        </span>
+        <i v-show="cartQuantity > 0" class="product-quantity">{{ cartQuantity }}</i>
+      </a>
+      <div v-show="cartOpen && cartQuantity > 0" class="icon-dropdown icon-dropdown-centered has-product">
+        <p class="total">
+          <label>{{ subtotalLabel }}</label>
+          <span class="unit">US $</span>
+          <span class="price">0.00</span>
+        </p>
+        <a class="ui-button red-button" :href="checkoutHref">{{ checkoutLabel }}</a>
+        <a class="ui-button empty-button" :href="cartHref">{{ viewCartLabel }}</a>
+      </div>
+      <div v-show="cartOpen && cartQuantity === 0" class="icon-dropdown icon-dropdown-centered no-product">
+        <p class="empty-cart">{{ emptyCartText }}</p>
+      </div>
+    </li>
 
-  <!-- Country -->
-  <li class="nav-icon lang-nav">
-    <a
-      tabindex="0"
-      role="button"
-      title="country selector"
-      class="country-item"
-      @click.prevent="$emit('country-click')"
+    <!-- Country -->
+    <li
+      class="nav-icon lang-nav"
+      :class="{ 'is-active': countryActive }"
+      @mouseenter="$emit('country-enter')"
+      @mouseleave="$emit('country-leave')"
     >
-      <span class="icon-flag" aria-hidden="true">🇺🇸</span>
-      <span class="country-abbreviation" :title="country">{{ country }}</span>
-    </a>
-  </li>
+      <a
+        tabindex="0"
+        role="button"
+        title="country selector"
+        class="nav-icon-trigger country-item"
+        :class="{ 'is-active': countryActive }"
+      >
+        <span class="icon-flag icon-svg" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6">
+            <circle cx="12" cy="12" r="9" />
+            <ellipse cx="12" cy="12" rx="4" ry="9" />
+            <path d="M3 12h18" />
+            <path d="M4.5 7.5h15" />
+            <path d="M4.5 16.5h15" />
+          </svg>
+        </span>
+        <span class="country-abbreviation" :title="country">{{ country }}</span>
+      </a>
+    </li>
   </ul>
 </template>
 
 <script setup lang="ts">
 import type { AccountMenuItem, SearchRecommend } from '@/types/header'
+import { HEADER_COLORS } from '@/constants/header'
 
 defineProps<{
   searchOpen: boolean
   accountOpen: boolean
   cartOpen: boolean
+  countryActive: boolean
   searchQuery: string
   searchUrl: string
   searchPlaceholder: string
@@ -168,13 +192,18 @@ defineProps<{
 
 defineEmits<{
   'toggle-search': []
-  'close-search': []
   'search-input': [value: string]
   'search-submit': []
-  'toggle-account': []
-  'toggle-cart': []
-  'country-click': []
+  'account-enter': []
+  'account-leave': []
+  'cart-enter': []
+  'cart-leave': []
+  'country-enter': []
+  'country-leave': []
 }>()
+
+const brandPrimary = HEADER_COLORS.brandPrimary
+const navActiveBg = HEADER_COLORS.navActiveBg
 </script>
 
 <style scoped>
@@ -184,46 +213,74 @@ defineEmits<{
   list-style: none;
   margin: 0;
   padding: 0;
-  gap: 4px;
+  gap: 2px;
   height: 64px;
+  --nav-brand-primary: v-bind(brandPrimary);
+  --nav-active-bg: v-bind(navActiveBg);
 }
 
 .nav-icon {
   position: relative;
-}
-
-.search-item,
-.account-item,
-.manage-item,
-.country-item {
+  height: 100%;
   display: flex;
   align-items: center;
+}
+
+/* 与左侧主导航一致的选中态 */
+.nav-icon-trigger {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   gap: 6px;
   height: 40px;
-  padding: 0 10px;
+  margin: 0 2px;
+  padding: 0 12px;
   color: rgba(255, 255, 255, 0.85);
   cursor: pointer;
   text-decoration: none;
   border-radius: 8px;
-  transition: background 0.2s, color 0.2s;
+  border: none;
+  background: transparent;
+  transition: color 0.2s, background 0.2s;
 }
 
-.search-item:hover,
-.account-item:hover,
-.manage-item:hover,
-.country-item:hover {
-  background: rgba(255, 255, 255, 0.08);
+.nav-icon-trigger:hover {
   color: #fff;
+}
+
+.nav-icon-trigger.is-active {
+  color: var(--nav-brand-primary);
+  background: var(--nav-active-bg);
+}
+
+.nav-icon-trigger.is-active::after {
+  content: '';
+  position: absolute;
+  left: 8px;
+  right: 8px;
+  bottom: -12px;
+  height: 3px;
+  background: var(--nav-brand-primary);
+  border-radius: 2px 2px 0 0;
+}
+
+.nav-icon-trigger.is-active .country-abbreviation {
+  color: var(--nav-brand-primary);
 }
 
 .icon-svg {
   display: flex;
 }
 
+.manage-item {
+  position: relative;
+}
+
 .product-quantity {
   position: absolute;
-  top: 4px;
-  right: 4px;
+  top: 2px;
+  right: 2px;
   min-width: 16px;
   height: 16px;
   padding: 0 4px;
@@ -236,27 +293,37 @@ defineEmits<{
   text-align: center;
 }
 
-.manage-item {
-  position: relative;
+.country-abbreviation {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.85);
+  max-width: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  transition: color 0.2s;
 }
 
-.search-mask {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 999;
+/* 下拉浮层 — 与左侧子菜单一致 */
+.icon-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  z-index: 1001;
+  background: rgb(255, 255, 255);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 0 0 8px 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+/* 账户、购物车下拉与图标水平居中对齐 */
+.icon-dropdown-centered {
+  left: 50%;
+  right: auto;
+  transform: translateX(-50%);
 }
 
 .search-down {
-  position: absolute;
-  top: calc(100% + 8px);
-  right: 0;
   width: 420px;
-  background: rgb(255, 255, 255);
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  border-radius: 12px;
-  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.12);
-  z-index: 1002;
   overflow: hidden;
 }
 
@@ -296,21 +363,8 @@ defineEmits<{
   text-decoration: none;
 }
 
-.close-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 32px;
-  height: 32px;
-  border: none;
-  background: transparent;
-  color: rgba(0, 0, 0, 0.45);
-  cursor: pointer;
-}
-
 .search-info-mod {
   padding: 16px;
-  background: rgb(255, 255, 255);
 }
 
 .search-info-mod label {
@@ -374,57 +428,44 @@ defineEmits<{
   text-decoration: none;
 }
 
-.account-dropdown,
-.no-product {
-  position: absolute;
-  top: calc(100% + 8px);
-  right: 0;
+.account-dropdown {
   min-width: 180px;
   margin: 0;
-  padding: 8px 0;
+  padding: 10px 0;
   list-style: none;
-  background: rgb(255, 255, 255);
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  border-radius: 8px;
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
-  z-index: 1001;
 }
 
 .account-dropdown li a {
   display: block;
-  padding: 10px 20px;
-  color: rgba(0, 0, 0, 0.82);
+  padding: 12px 28px;
+  color: rgba(0, 0, 0, 0.65);
   font-size: 14px;
+  line-height: 1.4;
+  text-align: center;
   text-decoration: none;
+  transition: background 0.2s, color 0.2s;
 }
 
 .account-dropdown li a:hover {
   background: rgba(0, 0, 0, 0.04);
-  color: #1a1a1a;
+  color: rgba(0, 0, 0, 0.85);
 }
 
 .no-product {
-  display: block;
+  min-width: 200px;
 }
 
 .empty-cart {
   margin: 0;
-  padding: 16px 20px;
+  padding: 16px 28px;
   color: rgba(0, 0, 0, 0.55);
   font-size: 14px;
+  text-align: center;
 }
 
 .has-product {
-  position: absolute;
-  top: calc(100% + 8px);
-  right: 0;
   width: 280px;
   padding: 16px;
-  background: rgb(255, 255, 255);
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  border-radius: 8px;
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
-  z-index: 1001;
 }
 
 .total {
@@ -453,15 +494,6 @@ defineEmits<{
 .empty-button {
   border: 1px solid rgba(0, 0, 0, 0.18);
   color: #1a1a1a;
-}
-
-.country-abbreviation {
-  font-size: 13px;
-  color: rgba(255, 255, 255, 0.85);
-  max-width: 100px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
 }
 
 .sr-only {

@@ -9,8 +9,6 @@
       tabindex="0"
       class="nav-text"
       :class="{ 'is-active': visible }"
-      @click.prevent="$emit('toggle')"
-      @keydown.enter.prevent="$emit('toggle')"
     >
       <span>{{ productsLabel }}</span>
     </a>
@@ -182,7 +180,6 @@ const props = defineProps<{
 defineEmits<{
   mouseenter: []
   mouseleave: []
-  toggle: []
   'select-tab': [id: number]
   search: [value: string]
   'prev-page': [title: string]
