@@ -27,7 +27,10 @@
             v-for="(item, idx) in supportMenu"
             :key="idx"
             class="menu-item"
-            :class="{ 'item-download-center': item.children }"
+            :class="{
+              'item-download-center': item.children,
+              'menu-item-highlighted': item.children && downloadOpen,
+            }"
             @mouseenter="item.children && $emit('download-enter')"
             @mouseleave="item.children && $emit('download-leave')"
           >
@@ -248,9 +251,11 @@ const brandPrimary = HEADER_COLORS.brandPrimary
   transition: background 0.2s, color 0.2s;
 }
 
-.nav-dropdown-default li a:hover {
-  background: rgba(0, 0, 0, 0.04);
-  color: rgba(0, 0, 0, 0.85);
+.nav-dropdown-default li a:hover,
+.nav-dropdown-default li.menu-item-highlighted > a {
+  background-color: #f7f8f9;
+  color: var(--nav-brand-primary);
+  font-weight: 500;
 }
 
 .item-download-center {

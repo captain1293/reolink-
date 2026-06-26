@@ -162,7 +162,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import type { NavSubCategory, ProductCategoryPanel } from '@/types/header'
-import { IMG_URLS } from '@/constants/header'
+import { HEADER_COLORS, IMG_URLS } from '@/constants/header'
 
 const props = defineProps<{
   visible: boolean
@@ -187,6 +187,7 @@ defineEmits<{
 }>()
 
 const badgeImages = computed(() => IMG_URLS)
+const brandPrimary = HEADER_COLORS.brandPrimary
 
 function getPageIndex(sub: NavSubCategory) {
   return props.getListPageIndex(sub.title)
@@ -281,8 +282,9 @@ function getVisibleProducts(sub: NavSubCategory, page: number) {
 
 .product-cate-tab li:hover a,
 .product-cate-tab li.active a {
-  background: rgba(0, 0, 0, 0.04);
-  color: #1a1a1a;
+  background: #fff;
+  color: v-bind(brandPrimary);
+  font-weight: 500;
 }
 
 .animate-text-container {
@@ -309,6 +311,7 @@ function getVisibleProducts(sub: NavSubCategory, page: number) {
 .product-cate-tab li.active .link-icon {
   opacity: 1;
   transform: translateX(0);
+  color: v-bind(brandPrimary);
 }
 
 .all-product-btn {
@@ -326,8 +329,9 @@ function getVisibleProducts(sub: NavSubCategory, page: number) {
 }
 
 .all-product-btn:hover {
-  border-color: rgba(0, 0, 0, 0.35);
-  background: rgba(0, 0, 0, 0.03);
+  border-color: v-bind(brandPrimary);
+  background: #f7f8f9;
+  color: v-bind(brandPrimary);
 }
 
 .nav-product-container {
@@ -396,7 +400,12 @@ function getVisibleProducts(sub: NavSubCategory, page: number) {
 }
 
 .nav-product-list li a:hover {
-  background: rgba(0, 0, 0, 0.04);
+  background: #f7f8f9;
+  color: v-bind(brandPrimary);
+}
+
+.nav-product-list li a:hover span {
+  color: v-bind(brandPrimary);
 }
 
 .product-img-wrap {
@@ -486,7 +495,8 @@ function getVisibleProducts(sub: NavSubCategory, page: number) {
 }
 
 .bottom-link-btn:hover {
-  opacity: 0.8;
+  color: v-bind(brandPrimary);
+  opacity: 1;
 }
 
 .dropdown-fade-enter-active,

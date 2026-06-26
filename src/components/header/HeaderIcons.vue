@@ -276,12 +276,14 @@ const brandPrimary = HEADER_COLORS.brandPrimary
 }
 
 .account-dropdown li a:hover {
-  background: rgba(0, 0, 0, 0.04);
-  color: rgba(0, 0, 0, 0.85);
+  background-color: #f7f8f9;
+  color: var(--nav-brand-primary);
+  font-weight: 500;
 }
 
 .no-product {
-  min-width: 200px;
+  min-width: 280px;
+  width: max-content;
 }
 
 .empty-cart {
@@ -290,6 +292,7 @@ const brandPrimary = HEADER_COLORS.brandPrimary
   color: rgba(0, 0, 0, 0.55);
   font-size: 14px;
   text-align: center;
+  white-space: nowrap;
 }
 
 .has-product {
