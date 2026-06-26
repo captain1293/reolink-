@@ -4,6 +4,7 @@
   <TopPicksSection />
   <RecommendationSection />
   <TechnologySection />
+  <AppControlSection />
   <main class="demo-main">
   </main>
 </template>
@@ -14,6 +15,7 @@ import BannerSection from '@/components/banner/index.vue'
 import TopPicksSection from '@/components/topPicks/index.vue'
 import RecommendationSection from '@/components/recommendation/index.vue'
 import TechnologySection from '@/components/technology/index.vue'
+import AppControlSection from '@/components/appControl/index.vue'
 </script>
 
 <style>
