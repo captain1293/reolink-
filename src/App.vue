@@ -1,6 +1,7 @@
 <template>
   <ReolinkHeader />
   <BannerSection />
+  <TopPicksSection />
   <main class="demo-main">
   </main>
 </template>
@@ -8,6 +9,7 @@
 <script setup>
 import ReolinkHeader from '@/components/header/index.vue'
 import BannerSection from '@/components/banner/index.vue'
+import TopPicksSection from '@/components/topPicks/index.vue'
 </script>
 
 <style>
