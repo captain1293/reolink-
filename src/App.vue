@@ -5,6 +5,7 @@
   <RecommendationSection />
   <TechnologySection />
   <AppControlSection />
+  <PromiseSection />
   <main class="demo-main">
   </main>
 </template>
@@ -16,6 +17,7 @@ import TopPicksSection from '@/components/topPicks/index.vue'
 import RecommendationSection from '@/components/recommendation/index.vue'
 import TechnologySection from '@/components/technology/index.vue'
 import AppControlSection from '@/components/appControl/index.vue'
+import PromiseSection from '@/components/promise/index.vue'
 </script>
 
 <style>
