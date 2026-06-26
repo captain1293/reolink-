@@ -8,6 +8,7 @@
   <PromiseSection />
   <UserContentSection />
   <MediaRecognitionSection />
+  <AboutReolinkSection />
   <main class="demo-main">
   </main>
 </template>
@@ -22,6 +23,7 @@ import AppControlSection from '@/components/appControl/index.vue'
 import PromiseSection from '@/components/promise/index.vue'
 import UserContentSection from '@/components/userContent/index.vue'
 import MediaRecognitionSection from '@/components/mediaRecognition/index.vue'
+import AboutReolinkSection from '@/components/aboutReolink/index.vue'
 </script>
 
 <style>
