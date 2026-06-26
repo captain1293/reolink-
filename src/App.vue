@@ -1,12 +1,13 @@
 <template>
   <ReolinkHeader />
+  <BannerSection />
   <main class="demo-main">
-    <p>Reolink Header 复刻演示 — 悬停 <strong>Products</strong> 查看产品 Mega Menu</p>
   </main>
 </template>
 
 <script setup>
 import ReolinkHeader from '@/components/header/index.vue'
+import BannerSection from '@/components/banner/index.vue'
 </script>
 
 <style>
