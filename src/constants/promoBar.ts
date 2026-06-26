@@ -32,3 +32,9 @@ export const PROMO_BAR_ICON_VARS = {
 } as const
 
 export const PROMO_BAR_STORAGE_KEY = 'reolink-promo-bar-dismissed'
+
+/** 与底部固定促销条实际高度对齐，用于页脚占位与悬浮组件偏移 */
+export const PROMO_BAR_LAYOUT = {
+  heightDesktop: 80,
+  heightMobile: 160,
+} as const

@@ -62,7 +62,7 @@ const emit = defineEmits<{
   display: flex;
   justify-content: space-between;
   gap: 24px;
-  padding: 10px 40px 30px;
+  padding: 10px 40px 16px;
   background-color: #0050e2;
 }
 
@@ -180,7 +180,7 @@ const emit = defineEmits<{
 @media screen and (max-width: 1000px) {
   .footer-bottom-content {
     flex-direction: column;
-    padding: 10px 20px 30px;
+    padding: 10px 20px 16px;
   }
 
   .footer-br-content .copyright-worktime-box {

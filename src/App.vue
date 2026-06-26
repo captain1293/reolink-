@@ -12,6 +12,7 @@
   <ReolinkFooter />
   <PromoBar />
   <LiveStream />
+  <FloatingButtons />
 </template>
 
 <script setup>
@@ -28,6 +29,7 @@ import AboutReolinkSection from '@/components/aboutReolink/index.vue'
 import ReolinkFooter from '@/components/footer/index.vue'
 import PromoBar from '@/components/promoBar/index.vue'
 import LiveStream from '@/components/liveStream/index.vue'
+import FloatingButtons from '@/components/floatingButtons/index.vue'
 </script>
 
 <style>
@@ -42,5 +44,10 @@ body {
   background: #f5f6f8;
   color: #1a1a1a;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+:root {
+  --promo-bar-height: 80px;
+  --promo-bar-height-mobile: 160px;
 }
 </style>

@@ -169,7 +169,9 @@ const buttonStyle = computed(() => ({
   display: block;
   width: 100%;
   height: auto;
+  max-height: var(--promo-bar-height, 80px);
   object-fit: cover;
+  object-position: center;
 }
 
 .promo-bar-slide-enter-active,
@@ -208,7 +210,7 @@ const buttonStyle = computed(() => ({
   }
 
   .promo-image {
-    max-height: 200px;
+    max-height: var(--promo-bar-height-mobile, 160px);
   }
 }
 </style>
