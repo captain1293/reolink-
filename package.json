@@ -5,7 +5,9 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "build:local": "vite build --base ./",
     "preview": "vite preview",
+    "preview:local": "vite preview --base ./",
     "preview:gh-pages": "vite preview --base /reolink-/"
   },
   "dependencies": {
