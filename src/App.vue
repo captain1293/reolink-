@@ -1,5 +1,6 @@
 <template>
   <ReolinkHeader />
+  <WelcomePopup />
   <BannerSection />
   <TopPicksSection />
   <RecommendationSection />
@@ -17,6 +18,7 @@
 
 <script setup>
 import ReolinkHeader from '@/components/header/index.vue'
+import WelcomePopup from '@/components/welcomePopup/index.vue'
 import BannerSection from '@/components/banner/index.vue'
 import TopPicksSection from '@/components/topPicks/index.vue'
 import RecommendationSection from '@/components/recommendation/index.vue'
